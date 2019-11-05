@@ -1,0 +1,18 @@
+secretas = []
+score = []
+nomGanhador = []
+qtde = 3
+nome = pts = 0
+
+for i in range(qtde):
+    secretas.append(input(f'Digite {i+1} de {qtde} palavras para começar o jogo: '))
+
+for i in range(qtde):
+    print(secretas[i])
+
+def ganhouJogo():
+
+for i in range(qtde):
+    if ganhouJogo == True:
+        nomGanhador.append(nome)
+        score.append(pts)
