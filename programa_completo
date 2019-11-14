@@ -1,1 +1,83 @@
+from def_forca import *
+from random import randint
 
+
+
+continuar = ''
+nome = input('Digite seu nick: ')
+while True:
+    rand = randint(1, 10)
+
+    if continuar == 'n':
+        break
+    else:
+        erros = 0
+
+    escolha = int(input('Escolha o tipo de lista: (1 automóveis, 2 nomes, 3 frutas) '))
+
+
+    if escolha == 1:
+        f = open('automoveis.txt', 'r')
+        word_b = (f.readlines())[1]
+        tamanho = len(word_b)
+        tam = tamanho -1
+        word = word_b[0:tam]
+
+    if escolha == 2:
+        f = open('nomes.txt', 'r')
+        word_b = (f.readlines())[1]
+        tamanho = len(word_b)
+        tam = tamanho -1
+        word = word_b[0:tam]
+
+    if escolha == 3:
+        f = open('frutas.txt', 'r')
+        word_b = (f.readlines())[1]
+        tamanho = len(word_b)
+        tam = tamanho -1
+        word = word_b[0:tam]
+
+    #CAPTURA PALAVRA INICIAL
+
+    temp = []
+    for letra in word:
+        temp.append('_')
+    while True:
+        print('\n'*20)  # limpa a tela
+        forca(erros)  # imprime desenho da forca
+
+        # imprime a adivinhacao
+        print('\n\nAdivinhe: ', end='')
+
+        for let in temp:
+            print(let, end=' ')
+        print('\n'*2)
+
+        # Verifica se perdeu
+        if erros == 6:
+            print(f'A palavra era: {word}')
+            break  # sai do jogo (sai do while)
+
+
+        # Verificar se o jogador ganhou
+        ganhouJogo = True
+        for let in temp:
+            if let == '_':
+                ganhouJogo = False
+        if ganhouJogo:
+            print(f'\nPARABÉNS {nome} VOCÊ VENCEU!!!')
+            break
+
+        # captura a letra do usuario
+        letraDig = input('Informe uma letra: ')
+
+        # verifica se acertou alguma letra
+        errouLetra = True
+        for i, let in enumerate(word):
+            if word[i] == letraDig:
+                temp[i] = word[i]
+                errouLetra = False
+        if errouLetra:
+            erros = erros + 1
+
+    continuar = input('Gostaria de continuar jogando? (s ou n): ')
